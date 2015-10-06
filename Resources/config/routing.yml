@@ -1,3 +1,7 @@
-sev_one_qna_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: SevOneQnaBundle:Default:index }
+dcr_q2a:
+    pattern: /{path}
+    defaults: { _controller: SevOneDcrBundle:Q2A:index }
+    requirements:
+        path: "^qna(.+)?"
+    options:
+        expose: true
