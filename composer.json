@@ -1,0 +1,30 @@
+{
+    "name" : "sevone/qnabundle",
+    "description" : "qna bundle",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "codemonekys",
+        "email" : ""
+    }],
+    "keywords" : [
+        "qna bundle"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Company\\DemoBundle" : ""
+        }
+    },
+    "target-dir" : "SevOne/QnABundle",
+    "repositories" : [{
+    }],
+    "extra" : {
+    "branch-alias" : {
+            "dev-master" : "1.0-dev"
+        }
+    }
+}
