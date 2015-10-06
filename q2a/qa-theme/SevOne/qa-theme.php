@@ -46,7 +46,7 @@ class qa_html_theme extends qa_html_theme_base
 	public function __construct( $template, $content, $rooturl, $request )
 	{
 		$rooturl = str_replace( '../', '', $rooturl );
-		$rooturl = '/q2a/' . $rooturl;
+		$rooturl = '/bundles/sevoneqna/' . $rooturl;
 		parent::__construct( $template, $content, $rooturl, $request );
 	}
 
@@ -90,8 +90,6 @@ class qa_html_theme extends qa_html_theme_base
 	{
 		$jsUrl                     = $this->rooturl . $this->js_dir . '/sevone-core.js?' . QA_VERSION;
 		$this->content['script'][] = '<script src="' . $jsUrl . '"></script>';
-		//SevOne Custom:
-		//$this->content['script'][] = '<script src="/q2a/' . $jsUrl . '"></script>';
 
 		parent::head_script();
 	}

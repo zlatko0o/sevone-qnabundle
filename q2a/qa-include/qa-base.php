@@ -1639,7 +1639,7 @@
 
 	function get_sevone_path()
 	{
-		return '/q2a/';
+		return '/bundles/sevoneqna/';
 	}
 
 
