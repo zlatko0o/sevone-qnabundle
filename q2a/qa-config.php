@@ -33,7 +33,21 @@
 /**
  * Checks if we are running integrated version or stand alone app
  */
-if( !defined( 'IN_SEVONE' ) )
+if( defined( 'IN_SEVONE' ) )
+{
+	//SevOne Custom
+	/**
+	 * Parse yml file and get database settings
+	 */
+	function prepare( $config )
+	{
+		define( 'QA_MYSQL_HOSTNAME', $config['database_host'] );
+		define( 'QA_MYSQL_USERNAME', $config['database_user'] );
+		define( 'QA_MYSQL_PASSWORD', $config['database_password'] );
+		define( 'QA_MYSQL_DATABASE', $config['q2a_database_name'] );
+	}
+
+} else
 {
 	//fill these with your settings
 	define( 'QA_MYSQL_HOSTNAME', 'localhost' );

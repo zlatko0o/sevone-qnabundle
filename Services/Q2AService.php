@@ -2,58 +2,16 @@
 
 namespace SevOne\QnABundle\Services;
 
-use Doctrine\ORM\EntityManager;
-use SevOne\userBundle\Services\AvatarHelper;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-
 class Q2AService
 {
 	/**
-	 * @var \Symfony\Component\HttpFoundation\Request
+	 * @var QnAExternalUser
 	 */
-	public $request;
+	private $qnAExternal;
 
-	/**
-	 * @var EntityManager
-	 */
-	public $entityManager;
-
-	/**
-	 * @var SecurityContextInterface
-	 */
-	public $securityContext;
-
-	/**
-	 * @var Router
-	 */
-	public $router;
-
-	/**
-	 * @var AvatarHelper
-	 */
-	public $avatarHelper;
-	/**
-	 * @var ContainerInterface
-	 */
-	private $container;
-
-	public function __construct(
-		RequestStack $requestStack,
-		EntityManager $entityManager,
-		SecurityContextInterface $securityContext,
-		Router $router,
-		AvatarHelper $avatarHelper,
-		ContainerInterface $container )
+	public function __construct( QnAExternalUser $qnAExternal )
 	{
-		$this->request         = $requestStack->getCurrentRequest();
-		$this->entityManager   = $entityManager;
-		$this->securityContext = $securityContext;
-		$this->router          = $router;
-		$this->avatarHelper    = $avatarHelper;
-		$this->container       = $container;
+		$this->qnAExternal = $qnAExternal;
 	}
 
 	public function getPath()
@@ -68,8 +26,8 @@ class Q2AService
 	{
 		define( 'QA_BASE_DIR', $path );
 		define( 'IN_SEVONE', true );
-		
-		$config = $this->getConfig();
+
+		$config = $this->qnAExternal->getConfig();
 		define( 'QA_MYSQL_HOSTNAME', $config['database_host'] );
 		define( 'QA_MYSQL_USERNAME', $config['database_user'] );
 		define( 'QA_MYSQL_PASSWORD', $config['database_password'] );
@@ -85,20 +43,13 @@ class Q2AService
 		$_GET['qa-rewrite'] = $path;
 
 		ob_start();
+		require_once $q2aPath . 'qa-config.php';
+
+		prepare( $this->getConfig() );
 		require $q2aPath . 'qa-include/qa-index.php';
 		$response = ob_get_clean();
 
 		return $response;
-	}
-
-	private function getConfig()
-	{
-		return [
-			'database_host'     => $this->container->getParameter( 'database_host' ),
-			'database_user'     => $this->container->getParameter( 'database_user' ),
-			'database_password' => $this->container->getParameter( 'database_password' ),
-			'q2a_database_name' => $this->container->getParameter( 'q2a_database_name' ),
-		];
 	}
 
 	public function getSearchResults( $criteria, $start, $maxResults, $loggedUser, $fullcontent = false )

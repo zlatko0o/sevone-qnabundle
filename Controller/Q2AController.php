@@ -10,7 +10,7 @@ class Q2AController extends Controller
 {
 	public function indexAction( Request $request, $path )
 	{
-		$response = $this->get( 'connect.services.q2aservice' )->getResponse( $path );
+		$response = $this->get( 'sevone.qnabundle.q2aservice' )->getResponse( $path );
 
 		//we should not render template when we have ajax calls
 		if( $request->isXmlHttpRequest() )

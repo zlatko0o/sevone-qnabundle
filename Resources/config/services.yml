@@ -2,9 +2,15 @@ parameters:
 #    sev_one_qna.example.class: SevOne\QnABundle\Example
 
 services:
-    connect.services.q2aservice:
+
+    sevone.qnabundle.q2aservice:
         class: SevOne\QnABundle\Services\Q2AService
         arguments: [ "@request_stack", "@doctrine.orm.entity_manager", "@security.context", "@router", "@avatar_helper", "@service_container" ]
+
+    sevone.qnabundle.external_user:
+        class: SevOne\QnABundle\Services\Q2AService
+        arguments: [ "@request_stack", "@doctrine.orm.entity_manager", "@security.context", "@router", "@avatar_helper", "@service_container" ]
+
     app.routing_loader:
         class: SevOne\QnABundle\Routing\AdvancedLoader
         tags:
