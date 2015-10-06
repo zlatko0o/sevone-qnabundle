@@ -16,6 +16,6 @@ class Q2AController extends Controller
 		if( $request->isXmlHttpRequest() )
 			return new Response( $response );
 
-		return $this->render( 'SevOneDcrBundle:Q2A:index.html.twig', [ 'content' => $response, 'module' => 'qna' ] );
+		return $this->render( $this->get( 'sevone.qnabundle.external_user' )->getTemplate(), [ 'content' => $response, 'module' => 'qna' ] );
 	}
 }

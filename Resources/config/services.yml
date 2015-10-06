@@ -8,8 +8,7 @@ services:
         arguments: [ "@request_stack", "@doctrine.orm.entity_manager", "@security.context", "@router", "@avatar_helper", "@service_container" ]
 
     sevone.qnabundle.external_user:
-        class: SevOne\QnABundle\Services\Q2AService
-        arguments: [ "@request_stack", "@doctrine.orm.entity_manager", "@security.context", "@router", "@avatar_helper", "@service_container" ]
+        class: SevOne\QnABundle\Services\QnAExternal
 
     app.routing_loader:
         class: SevOne\QnABundle\Routing\AdvancedLoader
