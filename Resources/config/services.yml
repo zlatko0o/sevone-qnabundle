@@ -4,7 +4,7 @@ parameters:
 services:
     connect.services.q2aservice:
         class: SevOne\QnABundle\Services\Q2AService
-        arguments: [ "@request_stack", "@doctrine.orm.entity_manager", "@security.context", "@router", "@avatar_helper" ]
+        arguments: [ "@request_stack", "@doctrine.orm.entity_manager", "@security.context", "@router", "@avatar_helper", "@service_container" ]
     app.routing_loader:
         class: SevOne\QnABundle\Routing\AdvancedLoader
         tags:

@@ -39,14 +39,14 @@ if( defined( 'IN_SEVONE' ) )
 	/**
 	 * Parse yml file and get database settings
 	 */
-	$parametersPath = __DIR__ . '/../../app/config/parameters.yml';
-	$yaml           = new Symfony\Component\Yaml\Parser();
-	$config         = $yaml->parse( file_get_contents( $parametersPath ) )['parameters'];
+	function prepare( $config )
+	{
+		define( 'QA_MYSQL_HOSTNAME', $config['database_host'] );
+		define( 'QA_MYSQL_USERNAME', $config['database_user'] );
+		define( 'QA_MYSQL_PASSWORD', $config['database_password'] );
+		define( 'QA_MYSQL_DATABASE', $config['q2a_database_name'] );
+	}
 
-	define( 'QA_MYSQL_HOSTNAME', $config['database_host'] );
-	define( 'QA_MYSQL_USERNAME', $config['database_user'] );
-	define( 'QA_MYSQL_PASSWORD', $config['database_password'] );
-	define( 'QA_MYSQL_DATABASE', $config['q2a_database_name'] );
 } else
 {
 	//fill these with your settings
