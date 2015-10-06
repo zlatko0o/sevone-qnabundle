@@ -1,6 +1,6 @@
 dcr_q2a:
     pattern: /{path}
-    defaults: { _controller: SevOneDcrBundle:Q2A:index }
+    defaults: { _controller: SevOneQnaBundle:Q2A:index }
     requirements:
         path: "^qna(.+)?"
     options:
