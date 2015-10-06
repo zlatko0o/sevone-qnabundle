@@ -16,7 +16,7 @@
     },
     "autoload" : {
         "psr-0" : {
-            "Company\\DemoBundle" : ""
+            "SevOne\\QnABundle" : ""
         }
     },
     "target-dir" : "SevOne/QnABundle",
