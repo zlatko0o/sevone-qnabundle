@@ -1,6 +1,6 @@
 <?php
 
-namespace SevOne\DcrBundle\Services;
+namespace SevOne\QnABundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use SevOne\userBundle\Services\AvatarHelper;
@@ -47,7 +47,7 @@ class Q2AService
 
 	public function getPath()
 	{
-		$webFolder = $this->request->server->get( 'DOCUMENT_ROOT' ) . DIRECTORY_SEPARATOR;
+		$webFolder = realpath(__DIR__.'../q2a') . DIRECTORY_SEPARATOR;
 		$q2aFolder = 'q2a' . DIRECTORY_SEPARATOR;
 
 		return $webFolder . $q2aFolder;

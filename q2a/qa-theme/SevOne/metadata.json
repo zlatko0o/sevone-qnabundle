@@ -1,0 +1,10 @@
+{
+	"name": "SevOne",
+	"description": "SevOne Theme",
+	"version": "1.4",
+	"date": "2015-09-18",
+	"author": "Magi",
+	"author_uri": "http://connect.sevone.com",
+	"license": "GPLv2",
+	"min_q2a": "1.7"
+}
