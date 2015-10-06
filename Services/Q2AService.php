@@ -68,6 +68,12 @@ class Q2AService
 	{
 		define( 'QA_BASE_DIR', $path );
 		define( 'IN_SEVONE', true );
+		
+		$config = $this->getConfig();
+		define( 'QA_MYSQL_HOSTNAME', $config['database_host'] );
+		define( 'QA_MYSQL_USERNAME', $config['database_user'] );
+		define( 'QA_MYSQL_PASSWORD', $config['database_password'] );
+		define( 'QA_MYSQL_DATABASE', $config['q2a_database_name'] );
 	}
 
 	public function getResponse( $path )
@@ -79,9 +85,6 @@ class Q2AService
 		$_GET['qa-rewrite'] = $path;
 
 		ob_start();
-		require_once $q2aPath . 'qa-config.php';
-
-		prepare($this->getConfig());
 		require $q2aPath . 'qa-include/qa-index.php';
 		$response = ob_get_clean();
 
