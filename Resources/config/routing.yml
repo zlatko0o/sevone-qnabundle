@@ -1,0 +1,3 @@
+sev_one_qna_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: SevOneQnaBundle:Default:index }
