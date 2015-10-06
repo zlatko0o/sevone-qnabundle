@@ -5,7 +5,7 @@ services:
 
     sevone.qnabundle.q2aservice:
         class: SevOne\QnABundle\Services\Q2AService
-        arguments: [ "@request_stack", "@doctrine.orm.entity_manager", "@security.context", "@router", "@avatar_helper", "@service_container" ]
+        arguments: [ "@sevone.qnabundle.external_user" ]
 
     sevone.qnabundle.external_user:
         class: SevOne\QnABundle\Services\QnAExternal

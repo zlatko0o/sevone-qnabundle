@@ -2,7 +2,9 @@
 
 namespace SevOne\QnABundle\Services;
 
-use Symfony\Component\Intl\Exception\NotImplementedException;
+class NotImplementedException extends \Exception
+{
+}
 
 abstract class QnAExternal
 {

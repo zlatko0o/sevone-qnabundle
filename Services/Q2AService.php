@@ -7,11 +7,11 @@ class Q2AService
 	/**
 	 * @var QnAExternalUser
 	 */
-	private $qnAExternal;
+	public $QnAExternal;
 
-	public function __construct( QnAExternalUser $qnAExternal )
+	public function __construct( $qnAExternal )
 	{
-		$this->qnAExternal = $qnAExternal;
+		$this->QnAExternal = $qnAExternal;
 	}
 
 	public function getPath()
@@ -27,7 +27,7 @@ class Q2AService
 		define( 'QA_BASE_DIR', $path );
 		define( 'IN_SEVONE', true );
 
-		$config = $this->qnAExternal->getConfig();
+		$config = $this->QnAExternal->getConfig();
 		define( 'QA_MYSQL_HOSTNAME', $config['database_host'] );
 		define( 'QA_MYSQL_USERNAME', $config['database_user'] );
 		define( 'QA_MYSQL_PASSWORD', $config['database_password'] );
@@ -43,9 +43,6 @@ class Q2AService
 		$_GET['qa-rewrite'] = $path;
 
 		ob_start();
-		require_once $q2aPath . 'qa-config.php';
-
-		prepare( $this->getConfig() );
 		require $q2aPath . 'qa-include/qa-index.php';
 		$response = ob_get_clean();
 
