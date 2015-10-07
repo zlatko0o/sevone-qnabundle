@@ -184,13 +184,19 @@ class qa_html_theme extends qa_html_theme_base
 	 */
 	public function nav_main_sub()
 	{
-		$this->output( '<div class="qam-main-nav-wrapper clearfix">' );
-		$this->output( '<div class="sb-toggle-left qam-menu-toggle"><i class="icon-th-list"></i></div>' );
-		$this->nav_user_search();
-		$this->logo();
-		$this->nav( 'main' );
-		$this->output( '</div> <!-- END qam-main-nav-wrapper -->' );
-		$this->nav( 'sub' );
+
+		//		$this->output( '<div class="qam-main-nav-wrapper clearfix">' );
+		//		$this->output( '<div class="sb-toggle-left qam-menu-toggle"><i class="icon-th-list"></i></div>' );
+		//		$this->nav_user_search();
+		//		$this->logo();
+		//		$this->nav( 'main' );
+		//$this->output( '</div> <!-- END qam-main-nav-wrapper -->' );
+		$user = qa_get_logged_in_user_cache();
+		if( $user['level'] > QA_USER_LEVEL_MODERATOR )
+		{
+			$this->nav( 'sub' );
+		}
+
 	}
 
 	/**
@@ -225,7 +231,7 @@ class qa_html_theme extends qa_html_theme_base
 		$this->notices();
 
 		$this->widgets( 'full', 'top' );
-		//$this->header();
+		$this->header();
 
 		$this->output( '<div class="qa-body-wrapper">', '' );
 		$this->widgets( 'full', 'high' );
