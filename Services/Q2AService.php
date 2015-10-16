@@ -39,7 +39,7 @@ class Q2AService
 		$q2aPath = $this->getPath();
 		$this->defineConstants( $q2aPath );
 
-		$path               = str_replace( 'qna/', '', $path );
+		$path               = str_replace( 'forums/', '', $path );
 		$_GET['qa-rewrite'] = $path;
 
 		ob_start();

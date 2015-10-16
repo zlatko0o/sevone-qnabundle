@@ -2,6 +2,6 @@ dcr_q2a:
     pattern: /{path}
     defaults: { _controller: SevOneQnaBundle:Q2A:index }
     requirements:
-        path: "^qna(.+)?"
+        path: "^forums(.+)?"
     options:
         expose: true
