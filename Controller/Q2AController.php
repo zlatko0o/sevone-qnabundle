@@ -16,6 +16,11 @@ class Q2AController extends Controller
 		if( $request->isXmlHttpRequest() )
 			return new Response( $response );
 
+		//if we need rss response
+		if( strpos( $path, '.rss' ) !== false )
+			return new Response( $response );
+
+
 		return $this->render( $this->get( 'sevone.qnabundle.external_user' )->getTemplate(), [ 'content' => $response, 'module' => 'qna' ] );
 	}
 }
