@@ -1,0 +1,8 @@
+{
+	"name": "Most popular question",
+	"description": "Provides a list of most popular questions",
+	"version": "0.0.1",
+	"author": "Zlatko Petrov",
+	"license": "GPLv2",
+	"min_q2a": "1.4"
+}
