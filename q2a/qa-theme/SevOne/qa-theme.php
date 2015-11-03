@@ -308,8 +308,8 @@ class qa_html_theme extends qa_html_theme_base
 		$this->widgets( 'side', 'low' );
 		if( isset( $this->content['sidepanel'] ) )
 			$this->output_raw( $this->content['sidepanel'] );
-		//SevOne Custom
-//		$this->feed();
+
+		$this->feed();
 		$this->widgets( 'side', 'bottom' );
 		$this->output( '</div>', '' );
 	}
