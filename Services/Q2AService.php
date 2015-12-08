@@ -58,6 +58,6 @@ class Q2AService
 		require_once $path . 'qa-external/qa-external-users.php';
 		require_once $path . 'qa-include/app/search.php';
 
-		return qa_get_search_results( $criteria, $start, $maxResults, $loggedUser->getId(), false, $fullcontent );
+		return qa_get_search_results( $criteria, $start, $maxResults, $loggedUser->getId(), false, $fullcontent, true );
 	}
 }
