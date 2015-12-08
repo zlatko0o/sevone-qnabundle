@@ -107,6 +107,23 @@ class qa_search_basic
 		// for now, the built-in search engine ignores custom pages
 	}
 
+	public function process_search_count($query, $userid, $fullcontent)
+	{
+		require_once QA_INCLUDE_DIR.'db/selects.php';
+		require_once QA_INCLUDE_DIR.'util/string.php';
+
+		$words=qa_string_to_words($query);
+
+		$selectspec = qa_db_search_posts_selectspec($userid, $words, $words, $words, $words, trim($query), 0, $fullcontent, null);
+
+		$selectspec['columns'] = [ 'COUNT(^posts.postid) as cnt' ];
+		$selectspec['arraykey'] = null;
+
+		$results=array_values(qa_db_single_select($selectspec));
+
+		return isset($results[0]['cnt']) ? (int)$results[0]['cnt'] : 0;
+	}
+
 	public function process_search($query, $start, $count, $userid, $absoluteurls, $fullcontent)
 	{
 		require_once QA_INCLUDE_DIR.'db/selects.php';

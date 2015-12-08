@@ -26,7 +26,7 @@
 	}
 
 
-	function qa_get_search_results($query, $start, $count, $userid, $absoluteurls, $fullcontent)
+	function qa_get_search_results($query, $start, $count, $userid, $absoluteurls, $fullcontent, $returnCountToo = false)
 /*
 	Returns $count search results for $query performed by $userid, starting at offset $start. Set $absoluteurls to true
 	to get absolute URLs for the results and $fullcontent if the results should include full post content. This calls
@@ -53,6 +53,7 @@
 
 	//	Get the results
 
+		$realCountAll=$module->process_search_count($query, $userid, $fullcontent);
 		$results=$module->process_search($query, $start, $count, $userid, $absoluteurls, $fullcontent);
 
 	//	Work out what additional information (if any) we need to retrieve for the results
@@ -131,7 +132,7 @@
 
 	//	Return the results
 
-		return $results;
+		return $returnCountToo ? [ 'results' => $results, 'count' => $realCountAll ] : $results;
 	}
 
 

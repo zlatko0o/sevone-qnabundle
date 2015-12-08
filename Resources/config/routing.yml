@@ -5,3 +5,20 @@ dcr_q2a:
         path: "^forums(.+)?"
     options:
         expose: true
+
+#All routes below will match dcr_q2a, they are used only for url generating
+dcr_q2a_ask_question:
+    pattern: /forums/ask
+    defaults: { _controller: SevOneQnaBundle:Q2A:index }
+    requirements:
+        path: "^forums(.+)?"
+    options:
+        expose: true
+
+dcr_q2a_favorites:
+    pattern: /forums/favorites
+    defaults: { _controller: SevOneQnaBundle:Q2A:index }
+    requirements:
+        path: "^forums(.+)?"
+    options:
+        expose: true
