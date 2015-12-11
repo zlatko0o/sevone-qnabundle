@@ -813,9 +813,16 @@
 		if ($selectparts==0)
 			$selectspec['source'].='(SELECT NULL as questionid, 0 AS score, NULL AS matchposttype, NULL AS matchpostid FROM ^posts WHERE postid IS NULL)';
 
-		$selectspec['source'].=") x LEFT JOIN ^posts ON ^posts.postid=questionid GROUP BY questionid ORDER BY score DESC LIMIT #,#) y ON ^posts.postid=y.questionid";
 
-		array_push($selectspec['arguments'], $start, $count);
+		$selectspec['source'].=") x LEFT JOIN ^posts ON ^posts.postid=questionid GROUP BY questionid ORDER BY score DESC ";
+
+		if ($count > 0)
+		{
+			array_push($selectspec['arguments'], $start, $count);
+			$selectspec['source'].=" LIMIT #,#";
+		}
+
+		$selectspec['source'].= ") y ON ^posts.postid=y.questionid";
 
 		return $selectspec;
 	}

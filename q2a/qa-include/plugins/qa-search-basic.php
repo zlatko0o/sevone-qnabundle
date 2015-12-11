@@ -114,7 +114,7 @@ class qa_search_basic
 
 		$words=qa_string_to_words($query);
 
-		$selectspec = qa_db_search_posts_selectspec($userid, $words, $words, $words, $words, trim($query), 0, $fullcontent, null);
+		$selectspec = qa_db_search_posts_selectspec($userid, $words, $words, $words, $words, trim($query), 0, $fullcontent, 0);
 
 		$selectspec['columns'] = [ 'COUNT(^posts.postid) as cnt' ];
 		$selectspec['arraykey'] = null;
