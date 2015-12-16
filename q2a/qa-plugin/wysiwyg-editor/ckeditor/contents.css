@@ -94,8 +94,6 @@ pre
 	white-space: pre-wrap; /* CSS 2.1 */
 	word-wrap: break-word; /* IE7 */
 	-moz-tab-size: 4;
-	-o-tab-size: 4;
-	-webkit-tab-size: 4;
 	tab-size: 4;
 }
 
@@ -131,4 +129,30 @@ a > img {
 	margin: 1px;
 	border: none;
 	outline: 1px solid #0782C1;
+}
+
+/*
+	The following definitions should be consistent with jsmessages.css:
+*/
+
+img
+{
+	border: 1px solid #7f8c8d;
+	margin-right: 5px;
+	padding: 2px;
+	width: auto !important;
+	height: auto !important;
+	max-width: 200px;
+	max-height: 200px;
+	vertical-align: middle; /* <-- Required to unify the text position when no float */
+}
+
+div.jsm div.message div.msg-body img[style*="float:left"] {
+	margin-left: 0;
+	margin-right: 5px;
+}
+
+div.jsm div.message div.msg-body img[style*="float:right"] {
+	margin-left: 5px;
+	margin-right: 0;
 }

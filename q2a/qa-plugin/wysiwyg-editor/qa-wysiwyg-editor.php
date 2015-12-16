@@ -205,7 +205,26 @@ class qa_wysiwyg_editor
 			"if (qa_ckeditor_".$fieldname." = CKEDITOR.replace(".qa_js($fieldname).", qa_wysiwyg_editor_config)) { " .
 				"qa_ckeditor_".$fieldname.".setData(document.getElementById(".qa_js($fieldname.'_ckeditor_data').").value); " .
 				"document.getElementById(".qa_js($fieldname.'_ckeditor_ok').").value = 1; " .
-			"}";
+			"}
+			CKEDITOR.on( 'dialogDefinition', function( event ) {
+					var dialogName          = event.data.name;
+					var dialogDefinition    = event.data.definition;
+
+					if( dialogName == 'image' ) {
+						var tab = dialogDefinition.getContents( 'info' );
+
+						tab.get( 'txtWidth'  ).style = 'display:none';
+						tab.get( 'txtHeight' ).style = 'display:none';
+						tab.get( 'ratioLock' ).style = 'display:none';
+						tab.get( 'txtUrl' ).hidden = true;
+
+						// clear orphanage on cancel
+						dialogDefinition.dialog.on( 'cancel', function() {
+							$.post( Routing.generate( 'dcr_ckeditor_clear' ) );
+						});
+					}
+				});
+			";
 	}
 
 	public function focus_script($fieldname)

@@ -67,4 +67,9 @@ abstract class QnAExternal
 	{
 		throw new NotImplementedException( 'QnAExternalUser is not implemented' );
 	}
+
+	public function getCkeFileBrowser()
+	{
+		throw new NotImplementedException( 'QnAExternalUser is not implemented' );
+	}
 }

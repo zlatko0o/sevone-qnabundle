@@ -60,4 +60,10 @@ class Q2AService
 
 		return qa_get_search_results( $criteria, $start, $maxResults, $loggedUser->getId(), false, $fullcontent, true );
 	}
+
+	public function processPostImages( $message )
+	{
+		$service = $this->QnAExternal->getCkeFileBrowser();
+		return $service->processImages( $message );
+	}
 }
