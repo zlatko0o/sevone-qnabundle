@@ -137,19 +137,19 @@
 		if ($params['html'])
 			$mailer->IsHTML(true);
 
-		if (qa_opt('smtp_active')) {
+		global $self;
+		/*** @var \Symfony\Component\DependencyInjection\ContainerInterface $container */
+		$container = $self->getContainer();
+
+		if( qa_opt( 'smtp_active' ) )
+		{
 			$mailer->IsSMTP();
-			$mailer->Host=qa_opt('smtp_address');
-			$mailer->Port=qa_opt('smtp_port');
-
-			if (qa_opt('smtp_secure'))
-				$mailer->SMTPSecure=qa_opt('smtp_secure');
-
-			if (qa_opt('smtp_authenticate')) {
-				$mailer->SMTPAuth=true;
-				$mailer->Username=qa_opt('smtp_username');
-				$mailer->Password=qa_opt('smtp_password');
-			}
+			$mailer->Host       = $container->getParameter( 'swiftmailer.mailer.default.transport.smtp.host' );
+			$mailer->Port       = $container->getParameter( 'swiftmailer.mailer.default.transport.smtp.port' );
+			$mailer->SMTPSecure = $container->getParameter( 'swiftmailer.mailer.default.transport.smtp.encryption' );
+			$mailer->SMTPAuth   = true;
+			$mailer->Username   = $container->getParameter( 'swiftmailer.mailer.default.transport.smtp.username' );
+			$mailer->Password   = $container->getParameter( 'swiftmailer.mailer.default.transport.smtp.password' );
 		}
 
 		return $mailer->Send();
