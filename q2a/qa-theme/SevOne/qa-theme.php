@@ -296,7 +296,7 @@ class qa_html_theme extends qa_html_theme_base
 		 */
 		$container = $self->getContainer();
 
-		$links = "<div class=\"qa-sidepanel\"><div class='qa-widget-side'><h2>Quick links</h2> ";
+		$links = "<div class=\"qa-sidepanel\"><div class='qa-widget-side'><h2 class='sideBarH2'>Quick links</h2> ";
 
 		$links .= "<a href='{$container->get('router')->generate('dcr_q2a_ask_question')}'>Ask a question</a><br>";
 		$links .= "<a href='{$container->get('router')->generate('dcr_q2a_favorites')}'>Favorites</a>";
@@ -316,7 +316,7 @@ class qa_html_theme extends qa_html_theme_base
 		// remove sidebar for user profile pages
 		if( $this->template == 'user' )
 			return;
-		
+
 		$this->output( $this->quickLinks() );
 		$this->output( '<div id="qam-sidepanel-toggle"><i class="icon-left-open-big"></i></div>' );
 		$this->output( '<div class="qa-sidepanel" id="qam-sidepanel-mobile">' );

@@ -3614,3 +3614,13 @@ input[type="submit"], button {
 .icon-reply:before {
 	content: '\e82e';
 }
+
+.sideBarH2 {
+	display: block;
+	font-size: 1.25em;
+	margin-top: 0.83em;
+	margin-bottom: 1em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: 500;
+}
