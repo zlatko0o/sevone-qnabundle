@@ -3619,10 +3619,11 @@ input[type="submit"], button {
 	background: none !important;
 	color:#262626 !important;
 	display: block;
-	font-size: 1.25em;
-	margin-top: 0.83em;
-	margin-bottom: 1em;
-	margin-left: 0;
-	margin-right: 0;
-	font-weight: 500;
+	font-size: 1.25em !important;
+	margin-top: 0.83em !important;
+	margin-bottom: 1em !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	font-weight: 500 !important;
+	padding:0px !important;
 }
