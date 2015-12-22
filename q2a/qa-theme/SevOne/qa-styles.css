@@ -3617,7 +3617,7 @@ input[type="submit"], button {
 
 .sideBarH2 {
 	background: none !important;
-	color:#262626;
+	color:#262626 !important;
 	display: block;
 	font-size: 1.25em;
 	margin-top: 0.83em;

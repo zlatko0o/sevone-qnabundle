@@ -317,7 +317,11 @@ class qa_html_theme extends qa_html_theme_base
 		if( $this->template == 'user' )
 			return;
 
-		$this->output( $this->quickLinks() );
+		//links should be visible only for logged users
+		$userid=qa_get_logged_in_userid();
+		if(!empty($userid))
+			$this->output( $this->quickLinks() );
+
 		$this->output( '<div id="qam-sidepanel-toggle"><i class="icon-left-open-big"></i></div>' );
 		$this->output( '<div class="qa-sidepanel" id="qam-sidepanel-mobile">' );
 		$this->qam_search();
