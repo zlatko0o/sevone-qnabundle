@@ -54,7 +54,7 @@ class BestUsers
 
 				//skip ignored users
 				if( !isset( $ignoredUsernames[ $username ] ) )
-					$themeobject->output( "<li><a href='{$link}'>{$username} ({$points})</a><br></li>" );
+					$themeobject->output( "<li>$link ({$points})</li>" );
 
 			}
 			$themeobject->output( "</ol>" );
