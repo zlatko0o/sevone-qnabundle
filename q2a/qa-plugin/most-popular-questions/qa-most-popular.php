@@ -25,7 +25,8 @@ class qa_most_popular
 		while( $d = $data->fetch_array() )
 		{
 			$link = qa_q_path( $d['postid'], $d['title'] );
-			$themeobject->output( "<a href='{$link}'>{$d['title']}</a><br>" );
+			$title = htmlentities($d['title']);
+			$themeobject->output( "<a href='{$link}'>{$title}</a><br>" );
 		}
 	}
 }
