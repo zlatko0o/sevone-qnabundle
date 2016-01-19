@@ -242,9 +242,11 @@ class qa_wysiwyg_editor
 
 	public function read_post($fieldname)
 	{
+		global $self;
 		if (qa_post_text($fieldname.'_ckeditor_ok')) {
 			// CKEditor was loaded successfully
 			$html = qa_post_text($fieldname);
+			$html = $self->processPostImages( $html );
 
 			// remove <p>, <br>, etc... since those are OK in text
 			$htmlformatting = preg_replace('/<\s*\/?\s*(br|p)\s*\/?\s*>/i', '', $html);

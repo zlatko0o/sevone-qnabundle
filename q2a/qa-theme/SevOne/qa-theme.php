@@ -287,6 +287,25 @@ class qa_html_theme extends qa_html_theme_base
 //		$this->output('</div> <!-- END qam-footer-box -->');
 	}
 
+	private function quickLinks()
+	{
+		global $self;
+
+		/**
+		 * @var \Symfony\Component\DependencyInjection\ContainerInterface $container
+		 */
+		$container = $self->getContainer();
+
+		$links = "<div class=\"qa-sidepanel\"><div class='qa-widget-side'><h2 class='sideBarH2'>Quick links</h2> ";
+
+		$links .= "<a href='{$container->get('router')->generate('dcr_q2a_ask_question')}'>Ask a question</a><br>";
+		$links .= "<a href='{$container->get('router')->generate('dcr_q2a_favorites')}'>Favorites</a>";
+
+		$links .= "</div></div>";
+
+		return $links;
+	}
+
 	/**
 	 * Overridden to customize layout and styling
 	 *
@@ -297,6 +316,11 @@ class qa_html_theme extends qa_html_theme_base
 		// remove sidebar for user profile pages
 		if( $this->template == 'user' )
 			return;
+
+		//links should be visible only for logged users
+		$userid=qa_get_logged_in_userid();
+		if(!empty($userid))
+			$this->output( $this->quickLinks() );
 
 		$this->output( '<div id="qam-sidepanel-toggle"><i class="icon-left-open-big"></i></div>' );
 		$this->output( '<div class="qa-sidepanel" id="qam-sidepanel-mobile">' );

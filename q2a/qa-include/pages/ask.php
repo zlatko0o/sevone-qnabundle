@@ -112,10 +112,6 @@
 		$in['queued'] = qa_user_moderation_reason($userlevel) !== false;
 
 		qa_get_post_content('editor', 'content', $in['editor'], $in['content'], $in['format'], $in['text']);
-		if( $in['content'] )
-		{
-			$in['content'] = $self->processPostImages( $in['content'] );
-		}
 
 		$errors=array();
 

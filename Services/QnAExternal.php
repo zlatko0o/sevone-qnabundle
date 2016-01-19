@@ -72,4 +72,9 @@ abstract class QnAExternal
 	{
 		throw new NotImplementedException( 'QnAExternalUser is not implemented' );
 	}
+
+	public function getContainer()
+	{
+		throw new NotImplementedException( 'QnAExternalUser is not implemented' );
+	}
 }

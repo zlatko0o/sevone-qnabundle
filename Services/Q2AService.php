@@ -66,4 +66,9 @@ class Q2AService
 		$service = $this->QnAExternal->getCkeFileBrowser();
 		return $service->processImages( $message );
 	}
+
+	public function getContainer()
+	{
+		return $this->QnAExternal->getContainer();
+	}
 }
