@@ -222,6 +222,9 @@ class qa_wysiwyg_editor
 						dialogDefinition.dialog.on( 'cancel', function() {
 							$.post( Routing.generate( 'dcr_ckeditor_clear' ) );
 						});
+						
+						dialogDefinition.removeContents('Link');
+						dialogDefinition.removeContents('advanced');
 					}
 				});
 			";
