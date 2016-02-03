@@ -64,7 +64,7 @@ class Q2AService
 	public function processPostImages( $message )
 	{
 		$service = $this->QnAExternal->getCkeFileBrowser();
-		return $service->processImages( $message );
+		return $service->processImages( $message, $this->getContainer()->get('security.context')->getToken()->getUser());
 	}
 
 	public function getContainer()
