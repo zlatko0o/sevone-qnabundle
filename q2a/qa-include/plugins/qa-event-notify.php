@@ -67,8 +67,14 @@ class qa_event_notify
 						'^a_content' => qa_block_words_replace($params['text'], qa_get_block_words_preg()),
 						'^url' => qa_q_path($question['postid'], $question['title'], true, 'A', $params['postid']),
 					));
-				break;
 
+				if( !qa_post_is_by_user( $question, $userid, $cookieid ) )
+				{
+					global $self;
+
+					return $self->QnAExternal->emitAnswerAddedEvent( $params, $userid, [$question['userid']] );
+				}
+				break;
 
 			case 'c_post':
 				$parent=$params['parent'];
@@ -76,6 +82,7 @@ class qa_event_notify
 
 				$senttoemail=array(); // to ensure each user or email gets only one notification about an added comment
 				$senttouserid=array();
+				$connectUserIds = [];
 
 				switch ($parent['basetype']) {
 					case 'Q':
@@ -97,6 +104,9 @@ class qa_event_notify
 				$sendtext=qa_block_words_replace($params['text'], $blockwordspreg);
 				$sendurl=qa_q_path($question['postid'], $question['title'], true, 'C', $params['postid']);
 
+				if( !qa_post_is_by_user( $parent, $userid, $cookieid ) )
+					$connectUserIds[$parent['userid']] = $parent['userid'];
+
 				if (isset($parent['notify']) && !qa_post_is_by_user($parent, $userid, $cookieid)) {
 					$senduserid=$parent['userid'];
 					$sendemail=@$parent['notify'];
@@ -115,6 +125,10 @@ class qa_event_notify
 				}
 
 				foreach ($params['thread'] as $comment)
+
+					if(!qa_post_is_by_user($comment, $userid, $cookieid))
+						$connectUserIds[$comment['userid']] = $comment['userid'];
+
 					if (isset($comment['notify']) && !qa_post_is_by_user($comment, $userid, $cookieid)) {
 						$senduserid=$comment['userid'];
 						$sendemail=@$comment['notify'];
@@ -139,6 +153,8 @@ class qa_event_notify
 							'^url' => $sendurl,
 						));
 					}
+				global $self;
+				$self->emitCommentAddedEvent( $params, $userid, $connectUserIds );
 				break;
 
 

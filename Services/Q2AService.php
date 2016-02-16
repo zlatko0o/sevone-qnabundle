@@ -5,7 +5,7 @@ namespace SevOne\QnABundle\Services;
 class Q2AService
 {
 	/**
-	 * @var QnAExternalUser
+	 * @var QnAExternal
 	 */
 	public $QnAExternal;
 
@@ -64,11 +64,22 @@ class Q2AService
 	public function processPostImages( $message )
 	{
 		$service = $this->QnAExternal->getCkeFileBrowser();
-		return $service->processImages( $message, $this->getContainer()->get('security.context')->getToken()->getUser());
+
+		return $service->processImages( $message, $this->getContainer()->get( 'security.context' )->getToken()->getUser() );
 	}
 
 	public function getContainer()
 	{
 		return $this->QnAExternal->getContainer();
+	}
+
+	public function emitAnswerAddedEvent( $params, $userid, $uids )
+	{
+		$this->QnAExternal->emitAnswerAddedEvent( $params, $userid, $uids );
+	}
+
+	public function emitCommentAddedEvent( $params, $user, $uids )
+	{
+		$this->QnAExternal->emitCommentAddedEvent( $params, $user, $uids );
 	}
 }
