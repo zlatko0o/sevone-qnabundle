@@ -82,4 +82,9 @@ class Q2AService
 	{
 		$this->QnAExternal->emitCommentAddedEvent( $params, $user, $uids );
 	}
+
+	public function emitBestAnswerSelectedEvent( $params, $user, $recipient )
+	{
+		$this->QnAExternal->emitBestAnswerSelectedEvent( $params, $user, $recipient );
+	}
 }

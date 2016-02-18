@@ -87,4 +87,9 @@ abstract class QnAExternal
 	{
 		throw new NotImplementedException( 'QnAExternalUser is not implemented' );
 	}
+
+	public function emitBestAnswerSelectedEvent( $params, $user, $recipient )
+	{
+		throw new NotImplementedException( 'QnAExternalUser is not implemented' );
+	}
 }

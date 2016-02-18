@@ -242,6 +242,9 @@ class qa_event_notify
 						'^a_content' => $sendcontent,
 						'^url' => qa_q_path($params['parentid'], $params['parent']['title'], true, 'A', $params['postid']),
 					));
+
+					global $self;
+					$self->emitBestAnswerSelectedEvent( $params, $userid, $answer['userid'] );
 				}
 				break;
 
