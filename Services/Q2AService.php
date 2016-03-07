@@ -24,14 +24,20 @@ class Q2AService
 
 	public function defineConstants( $path )
 	{
-		define( 'QA_BASE_DIR', $path );
-		define( 'IN_SEVONE', true );
+		if( !defined( 'QA_BASE_DIR' ) )
+			define( 'QA_BASE_DIR', $path );
+		if( !defined( 'IN_SEVONE' ) )
+			define( 'IN_SEVONE', true );
 
 		$config = $this->QnAExternal->getConfig();
-		define( 'QA_MYSQL_HOSTNAME', $config['database_host'] );
-		define( 'QA_MYSQL_USERNAME', $config['database_user'] );
-		define( 'QA_MYSQL_PASSWORD', $config['database_password'] );
-		define( 'QA_MYSQL_DATABASE', $config['q2a_database_name'] );
+		if( !defined( 'QA_MYSQL_HOSTNAME' ) )
+			define( 'QA_MYSQL_HOSTNAME', $config['database_host'] );
+		if( !defined( 'QA_MYSQL_USERNAME' ) )
+			define( 'QA_MYSQL_USERNAME', $config['database_user'] );
+		if( !defined( 'QA_MYSQL_PASSWORD' ) )
+			define( 'QA_MYSQL_PASSWORD', $config['database_password'] );
+		if( !defined( 'QA_MYSQL_DATABASE' ) )
+			define( 'QA_MYSQL_DATABASE', $config['q2a_database_name'] );
 	}
 
 	public function getResponse( $path )
