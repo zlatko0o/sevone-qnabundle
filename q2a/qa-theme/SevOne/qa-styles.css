@@ -2640,11 +2640,11 @@ input[type="submit"], button {
 	background-image: url('images/icons/edit.png');
 }
 .qa-c-list-item .qa-form-light-button-flag {
-	background-image: url('images/icons/flag.png');
+	background-image: url('images/icons/ban.png');
 }
 .qa-c-list-item .qa-form-light-button-unflag {
 	background-color: #e4afaf;
-	background-image: url('images/icons/flag.png');
+	background-image: url('images/icons/ban.png');
 }
 .qa-c-list-item .qa-form-light-button-clearflags {
 	background-image: url('images/icons/un-flag.png');
