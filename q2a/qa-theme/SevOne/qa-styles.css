@@ -2202,23 +2202,23 @@ input[type="submit"], button {
 	background-image: url('images/icons/edit-white.png');
 }
 .qa-form-light-button-flag {
-	background-image: url('images/icons/flag-white.png');
+	background-image: url('images/icons/ban-white.png');
 }
 .qa-form-light-button-unflag {
 	background-color: #812b2b;
-	background-image: url('images/icons/flag-white.png');
+	background-image: url('images/icons/ban-white.png');
 }
 .qa-form-light-button-clearflags {
 	background-image: url('images/icons/un-flag-white.png');
 }
 .qa-form-light-button-hide {
-	background-image: url('images/icons/hide-white.png');
+	background-image: url('images/icons/eye-hide-white.png');
 }
 .qa-form-light-button-follow {
-	background-image: url('images/icons/reply-white.png');
+	background-image: url('images/icons/question-white.png');
 }
 .qa-form-light-button-reshow {
-	background-image: url('images/icons/show-white.png');
+	background-image: url('images/icons/eye-show-white.png');
 }
 .qa-form-light-button-claim {
 	background-image: url('images/icons/claim-white.png');
