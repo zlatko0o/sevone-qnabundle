@@ -68,11 +68,19 @@ class qa_event_notify
 						'^url' => qa_q_path($question['postid'], $question['title'], true, 'A', $params['postid']),
 					));
 
+				global $self;
+
+				// Notify the author ( 1 recipient ) + users who have favored the question
 				if( !qa_post_is_by_user( $question, $userid, $cookieid ) )
 				{
-					global $self;
+					$params['users_favored'] = qa_post_favorite_users($params['parentid'], $userid, $params['parent']['userid']);
 
 					return $self->QnAExternal->emitAnswerAddedEvent( $params, $userid, [$question['userid']] );
+				} else {
+					// Notify only who have favored the question
+					$params['users_favored'] = qa_post_favorite_users($params['parentid'], $userid, $params['parent']['userid']);
+
+					return $self->QnAExternal->emitAnswerAddedEvent( $params, $userid, [] );
 				}
 				break;
 
@@ -154,6 +162,9 @@ class qa_event_notify
 						));
 					}
 				global $self;
+
+				$params['users_favored'] = qa_post_favorite_users($params['questionid'], $userid, $params['question']['userid']);
+
 				$self->emitCommentAddedEvent( $params, $userid, $connectUserIds );
 				break;
 
@@ -242,10 +253,13 @@ class qa_event_notify
 						'^a_content' => $sendcontent,
 						'^url' => qa_q_path($params['parentid'], $params['parent']['title'], true, 'A', $params['postid']),
 					));
-
-					global $self;
-					$self->emitBestAnswerSelectedEvent( $params, $userid, $answer['userid'] );
 				}
+
+				global $self;
+
+				$params['users_favored'] = qa_post_favorite_users($params['parentid'], $userid, $params['parent']['userid']);
+
+				$self->emitBestAnswerSelectedEvent( $params, $userid, $answer['userid'] );
 				break;
 
 

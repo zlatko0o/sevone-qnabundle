@@ -360,6 +360,30 @@
 			qa_db_query_sub("REPLACE ^options (title, content) SELECT 'cache_queuedcount', COUNT(*) FROM ^posts WHERE type IN ('Q_QUEUED', 'A_QUEUED', 'C_QUEUED')");
 	}
 
+/**
+ * @param int $postid Post ID
+ * @param int $actorid Actor ID
+ * @param int $authorid Author ID
+ * @return array
+ */
+function qa_post_favorite_users( $postid, $actorid, $authorid)
+/*
+	Returns all users who have this post as favorite
+*/
+	{
+		$postid = (int) $postid;
+		$actorid = (int) $actorid;
+		$authorid = (int) $authorid;
+
+		$result = qa_db_read_all_assoc(qa_db_query_sub(
+			'SELECT ^userfavorites.userid
+			FROM ^userfavorites
+			WHERE entitytype=$ AND entityid=$ AND userid NOT IN ($)',
+			QA_ENTITY_QUESTION, $postid, [ $actorid, $authorid ]
+		), 'userid');
+
+		return array_column($result, 'userid');
+	}
 /*
 	Omit PHP closing tag to help avoid accidental output
 */
