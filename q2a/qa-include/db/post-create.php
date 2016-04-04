@@ -386,7 +386,12 @@ function qa_post_favorite_users( $postid, $actorid, $authorid)
 
 		return array_filter($data, function($userid) use ($actorid, $authorid) {
 			if ($userid == $actorid)
-				return $userid != $authorid;
+			{
+				if ($userid == $authorid)
+					return false;
+
+				return false;
+			}
 
 			return true;
 		});
