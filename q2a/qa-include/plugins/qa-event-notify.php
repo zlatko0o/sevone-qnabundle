@@ -74,18 +74,9 @@ class qa_event_notify
 
 				global $self;
 
-				// Notify the author ( 1 recipient ) + users who have favored the question
-				if( !qa_post_is_by_user( $question, $userid, $cookieid ) )
-				{
-					$params['users_favored'] = qa_post_favorite_users($params['parentid'], $userid, $params['parent']['userid']);
+				$params['users_favored'] = qa_post_favorite_users($params['parentid'], $userid, $params['parent']['userid']);
 
-					return $self->QnAExternal->emitAnswerAddedEvent( $params, $userid, [$question['userid']] );
-				} else {
-					// Notify only who have favored the question
-					$params['users_favored'] = qa_post_favorite_users($params['parentid'], $userid, $params['parent']['userid']);
-
-					return $self->QnAExternal->emitAnswerAddedEvent( $params, $userid, [] );
-				}
+				return $self->QnAExternal->emitAnswerAddedEvent( $params, $userid, [$question['userid']] );
 				break;
 
 			case 'c_post':

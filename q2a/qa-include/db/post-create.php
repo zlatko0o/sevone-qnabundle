@@ -388,9 +388,6 @@ function qa_post_favorite_users( $postid, $actorid, $authorid)
 			if ($userid == $actorid)
 				return false;
 
-			if ($userid == $authorid)
-				return false;
-
 			return true;
 		});
 	}
