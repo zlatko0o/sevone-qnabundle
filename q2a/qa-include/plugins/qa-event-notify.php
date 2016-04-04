@@ -53,6 +53,10 @@ class qa_event_notify
 						'^q_content' => $params['text'],
 						'^url' => qa_q_path($params['postid'], $params['title'], true),
 					));
+				
+				global $self;
+				
+				return $self->QnAExternal->emitQuestionAddedEvent( $params, $userid );
 
 				break;
 

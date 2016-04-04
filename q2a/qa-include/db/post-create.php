@@ -382,7 +382,14 @@ function qa_post_favorite_users( $postid, $actorid, $authorid)
 			QA_ENTITY_QUESTION, $postid, [ $actorid, $authorid ]
 		), 'userid');
 
-		return array_column($result, 'userid');
+		$data = array_column($result, 'userid');
+
+		return array_filter($data, function($userid) use ($actorid, $authorid) {
+			if ($userid == $actorid)
+				return $userid != $authorid;
+
+			return true;
+		});
 	}
 /*
 	Omit PHP closing tag to help avoid accidental output

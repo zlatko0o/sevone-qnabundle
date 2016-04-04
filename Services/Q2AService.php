@@ -93,4 +93,59 @@ class Q2AService
 	{
 		$this->QnAExternal->emitBestAnswerSelectedEvent( $params, $user, $recipient );
 	}
+	
+		public function digestEmail( $time )
+	{
+		$path = $this->getPath();
+		$this->defineConstants( $path );
+
+		require_once $path . 'qa-include/qa-base.php';
+		require_once $path . 'qa-external/qa-forum-reports.php';
+
+		$questions = array_map( function ( $item ) {
+			$item['action'] = 'wrote a question -';
+			$item['url'] = $item['postid'];
+			return $item;
+		}, qa_questions_last_day( $time ) );
+
+		$answers = array_map( function ( $item ) {
+			$item['action'] = 'answered on';
+			$item['url'] = $item['postid'];
+			return $item;
+		}, qa_answers_last_day( $time ) );
+
+		$comments = array_map( function ( $item ) {
+			$item['action'] = 'commented on';
+			$item['url'] = $item['postid'] . '?show='.$item['commentid'].'#c' . $item['commentid'];
+			return $item;
+		}, qa_comments_last_day( $time ) );
+
+		$count = [
+			'questions' => count( $questions ),
+			'questions_no_answers' => qa_questions_no_answer_last_day( $time ),
+			'answers'   => count( $answers ),
+			'comments'  => count( $comments )
+		];
+
+		$activity = array_merge( $questions, $answers, $comments );
+
+		usort( $activity, function ( $first, $second )
+		{
+			return $first['created'] < $second['created'];
+		} );
+
+		$QnAExternal = $this->QnAExternal;
+		$activity = array_map( function ( $item ) use ( $QnAExternal ) {
+			$item['user'] = $QnAExternal->getContainer()->get( 'user.users_repository' )->find( $item['userid'] );
+
+			return $item;
+		}, $activity );
+
+		$data = [
+			'count' => $count,
+			'activity' => $activity
+		];
+
+		$QnAExternal->getContainer()->get( 'connect.email_notifications' )->sendForumDigestActivityToAdmins( $data );
+	}
 }
