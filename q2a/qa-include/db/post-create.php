@@ -378,8 +378,8 @@ function qa_post_favorite_users( $postid, $actorid, $authorid)
 		$result = qa_db_read_all_assoc(qa_db_query_sub(
 			'SELECT ^userfavorites.userid
 			FROM ^userfavorites
-			WHERE entitytype=$ AND entityid=$ AND userid NOT IN ($)',
-			QA_ENTITY_QUESTION, $postid, [ $actorid, $authorid ]
+			WHERE entitytype=$ AND entityid=$',
+			QA_ENTITY_QUESTION, $postid
 		), 'userid');
 
 		$data = array_column($result, 'userid');
