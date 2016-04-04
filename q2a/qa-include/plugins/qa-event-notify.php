@@ -56,7 +56,7 @@ class qa_event_notify
 				
 				global $self;
 				
-				return $self->QnAExternal->emitQuestionAddedEvent( $params, $userid );
+				$self->QnAExternal->emitQuestionAddedEvent( $params, $userid );
 
 				break;
 
@@ -76,7 +76,7 @@ class qa_event_notify
 
 				$params['users_favored'] = qa_post_favorite_users($params['parentid'], $userid, $params['parent']['userid']);
 
-				return $self->QnAExternal->emitAnswerAddedEvent( $params, $userid, [$question['userid']] );
+				$self->QnAExternal->emitAnswerAddedEvent( $params, $userid, [$question['userid']] );
 				break;
 
 			case 'c_post':

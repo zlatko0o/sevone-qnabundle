@@ -135,8 +135,27 @@ class Q2AService
 		} );
 
 		$QnAExternal = $this->QnAExternal;
-		$activity = array_map( function ( $item ) use ( $QnAExternal ) {
-			$item['user'] = $QnAExternal->getContainer()->get( 'user.users_repository' )->find( $item['userid'] );
+		$foundUsers = $QnAExternal->getContainer()
+								  ->get( 'doctrine' )->getEntityManager()
+								  ->createQueryBuilder()->select( 'u.id, u.username' )->from( 'SevOneUserBundle:User', 'u' )
+								  ->getQuery()
+								  ->getResult( \Doctrine\ORM\Query::HYDRATE_ARRAY );
+
+		$users = [ ];
+		foreach ($foundUsers as $user)
+		{
+			$users[$user['id']] = $user;
+		}
+
+		$activity = array_map( function ( $item ) use ( $QnAExternal, $users ) {
+			if (array_key_exists($item['userid'], $users)) {
+				$item['user'] = $users[ $item['userid'] ];
+			} else {
+				$item['user'] = [
+					'id' => '',
+					'username' => ''
+				];
+			}
 
 			return $item;
 		}, $activity );
