@@ -172,6 +172,30 @@ class Q2AService
 
 	public function pageTitle( Request $request )
 	{
-		return 'Forums';
+		$path = $this->getPath();
+		$this->defineConstants( $path );
+
+		require_once $path . 'qa-include/qa-base.php';
+		require_once QA_INCLUDE_DIR.'app/posts.php';
+
+		$uri = array_filter( explode( '/', $request->getPathInfo()) );
+
+		$defaultTitle = 'Forums';
+
+		if ( ! isset( $uri[2] ) )
+			return $defaultTitle;
+
+		if ( (int) $uri[2] === 0 )
+			return $defaultTitle;
+
+		$question = qa_post_get_full($uri[2]);
+
+		if ( ! $question )
+			return $defaultTitle;
+
+		if ( ! isset( $question['title'] ) )
+			return $defaultTitle;
+
+		return $question['title'] . ' - Forums';
 	}
 }
