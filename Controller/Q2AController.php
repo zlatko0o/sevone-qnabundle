@@ -20,7 +20,12 @@ class Q2AController extends Controller
 		if( strpos( $path, '.rss' ) !== false )
 			return new Response( $response );
 
+		$data = [
+			'content' => $response,
+			'module' => 'qna',
+			'pageTitle' =>  $this->get( 'sevone.qnabundle.q2aservice' )->pageTitle( $request )
+		];
 
-		return $this->render( $this->get( 'sevone.qnabundle.external_user' )->getTemplate(), [ 'content' => $response, 'module' => 'qna' ] );
+		return $this->render( $this->get( 'sevone.qnabundle.external_user' )->getTemplate(), $data );
 	}
 }

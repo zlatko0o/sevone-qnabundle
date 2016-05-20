@@ -2,6 +2,8 @@
 
 namespace SevOne\QnABundle\Services;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class Q2AService
 {
 	/**
@@ -166,5 +168,10 @@ class Q2AService
 		];
 
 		$QnAExternal->getContainer()->get( 'connect.email_notifications' )->sendForumDigestActivityToAdmins( $data );
+	}
+
+	public function pageTitle( Request $request )
+	{
+		return 'Forums';
 	}
 }
