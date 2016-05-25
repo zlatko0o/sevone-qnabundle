@@ -306,6 +306,19 @@ class qa_html_theme extends qa_html_theme_base
 		return $links;
 	}
 
+	private function moderatorLinks()
+	{
+		$links = "<div class=\"qa-sidepanel\"><div class='qa-widget-side'><h2 class='sideBarH2'>Moderate</h2> ";
+
+		$links .= "<a href='".qa_path_html('admin/moderate')."'>Moderate</a><br>";
+		$links .= "<a href='".qa_path_html('admin/flagged')."'>Flagged</a><br>";
+		$links .= "<a href='".qa_path_html('admin/hidden')."'>Hidden</a><br>";
+
+		$links .= "</div></div>";
+
+		return $links;
+	}
+
 	/**
 	 * Overridden to customize layout and styling
 	 *
@@ -321,6 +334,9 @@ class qa_html_theme extends qa_html_theme_base
 		$userid=qa_get_logged_in_userid();
 		if(!empty($userid))
 			$this->output( $this->quickLinks() );
+
+		if ( QA_USER_LEVEL_MODERATOR === qa_user_level_maximum() )
+			$this->output( $this->moderatorLinks() );
 
 		$this->output( '<div id="qam-sidepanel-toggle"><i class="icon-left-open-big"></i></div>' );
 		$this->output( '<div class="qa-sidepanel" id="qam-sidepanel-mobile">' );
