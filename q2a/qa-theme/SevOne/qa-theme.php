@@ -293,7 +293,7 @@ class qa_html_theme extends qa_html_theme_base
 
 		$html .= $this->quickLinks();
 
-		if ( in_array( qa_user_level_maximum(), [ QA_USER_LEVEL_MODERATOR, QA_USER_LEVEL_ADMIN ] ) )
+		if ( qa_user_level_maximum() >= QA_USER_LEVEL_MODERATOR )
 			$html .= $this->moderatorLinks();
 
 		return $html;
@@ -348,7 +348,7 @@ class qa_html_theme extends qa_html_theme_base
 
 		$this->output( '<div id="qam-sidepanel-toggle"><i class="icon-left-open-big"></i></div>' );
 		$this->output( '<div class="qa-sidepanel" id="qam-sidepanel-mobile">' );
-		
+
 		if(!empty($userid))
 			$this->output( $this->loggedInSidebar() );
 
