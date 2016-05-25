@@ -287,6 +287,20 @@ class qa_html_theme extends qa_html_theme_base
 //		$this->output('</div> <!-- END qam-footer-box -->');
 	}
 
+	private function loggedInSidebar()
+	{
+		$html = "<div class=\"qa-sidepanel\">";
+
+		$html .= $this->quickLinks();
+
+		if ( in_array( qa_user_level_maximum(), [ QA_USER_LEVEL_MODERATOR, QA_USER_LEVEL_ADMIN ] ) )
+			$html .= $this->moderatorLinks();
+
+		$html .= "</div>";
+
+		return $html;
+	}
+
 	private function quickLinks()
 	{
 		global $self;
@@ -296,27 +310,27 @@ class qa_html_theme extends qa_html_theme_base
 		 */
 		$container = $self->getContainer();
 
-		$links = "<div class=\"qa-sidepanel\"><div class='qa-widget-side'><h2 class='sideBarH2'>Quick links</h2> ";
+		$html = "<div class='qa-widget-side'><h2 class='sideBarH2'>Quick links</h2> ";
 
-		$links .= "<a href='{$container->get('router')->generate('dcr_q2a_ask_question')}'>Ask a question</a><br>";
-		$links .= "<a href='{$container->get('router')->generate('dcr_q2a_favorites')}'>Favorites</a>";
+		$html .= "<a href='{$container->get('router')->generate('dcr_q2a_ask_question')}'>Ask a question</a><br>";
+		$html .= "<a href='{$container->get('router')->generate('dcr_q2a_favorites')}'>Favorites</a>";
 
-		$links .= "</div></div>";
+		$html .= "</div>";
 
-		return $links;
+		return $html;
 	}
 
 	private function moderatorLinks()
 	{
-		$links = "<div class=\"qa-sidepanel\"><div class='qa-widget-side'><h2 class='sideBarH2'>Moderate</h2> ";
+		$html = "<div class='qa-widget-side'><h2 class='sideBarH2'>Moderate</h2> ";
 
-		$links .= "<a href='".qa_path_html('admin/moderate')."'>Moderate</a><br>";
-		$links .= "<a href='".qa_path_html('admin/flagged')."'>Flagged</a><br>";
-		$links .= "<a href='".qa_path_html('admin/hidden')."'>Hidden</a><br>";
+		$html .= "<a href='".qa_path_html('admin/moderate')."'>Moderate</a><br>";
+		$html .= "<a href='".qa_path_html('admin/flagged')."'>Flagged</a><br>";
+		$html .= "<a href='".qa_path_html('admin/hidden')."'>Hidden</a><br>";
 
-		$links .= "</div></div>";
+		$html .= "</div>";
 
-		return $links;
+		return $html;
 	}
 
 	/**
@@ -333,10 +347,7 @@ class qa_html_theme extends qa_html_theme_base
 		//links should be visible only for logged users
 		$userid=qa_get_logged_in_userid();
 		if(!empty($userid))
-			$this->output( $this->quickLinks() );
-
-		if ( in_array( qa_user_level_maximum(), [ QA_USER_LEVEL_MODERATOR, QA_USER_LEVEL_ADMIN ] ) )
-			$this->output( $this->moderatorLinks() );
+			$this->output( $this->loggedInSidebar() );
 
 		$this->output( '<div id="qam-sidepanel-toggle"><i class="icon-left-open-big"></i></div>' );
 		$this->output( '<div class="qa-sidepanel" id="qam-sidepanel-mobile">' );
