@@ -335,7 +335,7 @@ class qa_html_theme extends qa_html_theme_base
 		if(!empty($userid))
 			$this->output( $this->quickLinks() );
 
-		if ( QA_USER_LEVEL_MODERATOR === qa_user_level_maximum() )
+		if ( in_array( qa_user_level_maximum(), [ QA_USER_LEVEL_MODERATOR, QA_USER_LEVEL_ADMIN ] ) )
 			$this->output( $this->moderatorLinks() );
 
 		$this->output( '<div id="qam-sidepanel-toggle"><i class="icon-left-open-big"></i></div>' );
