@@ -289,14 +289,12 @@ class qa_html_theme extends qa_html_theme_base
 
 	private function loggedInSidebar()
 	{
-		$html = "<div class=\"qa-sidepanel\">";
+		$html = '';
 
 		$html .= $this->quickLinks();
 
 		if ( in_array( qa_user_level_maximum(), [ QA_USER_LEVEL_MODERATOR, QA_USER_LEVEL_ADMIN ] ) )
 			$html .= $this->moderatorLinks();
-
-		$html .= "</div>";
 
 		return $html;
 	}
@@ -346,11 +344,14 @@ class qa_html_theme extends qa_html_theme_base
 
 		//links should be visible only for logged users
 		$userid=qa_get_logged_in_userid();
-		if(!empty($userid))
-			$this->output( $this->loggedInSidebar() );
+
 
 		$this->output( '<div id="qam-sidepanel-toggle"><i class="icon-left-open-big"></i></div>' );
 		$this->output( '<div class="qa-sidepanel" id="qam-sidepanel-mobile">' );
+		
+		if(!empty($userid))
+			$this->output( $this->loggedInSidebar() );
+
 		$this->qam_search();
 		$this->widgets( 'side', 'top' );
 		$this->sidebar();
