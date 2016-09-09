@@ -882,7 +882,7 @@ blockquote p {
 @media (min-width: 980px) {
 	.qa-main {
 		width: 74.5%;
-		float: left;
+		float: right;
 	}
 	.qam-topbar, .qa-main-wrapper {
 		width: 100%;
@@ -2758,7 +2758,7 @@ input[type="submit"], button {
 	.qa-sidepanel {
 		width: 25%;
 		padding: 0px;
-		float: right;
+		float: left;
 		overflow: hidden;
 		*zoom: 1;
 	}
@@ -2828,6 +2828,7 @@ input[type="submit"], button {
 	padding: 20px;
 	margin-bottom: 5px;
 	background: #fff;
+	overflow: hidden;
 }
 
 .qa-sidebar {
@@ -3626,4 +3627,11 @@ input[type="submit"], button {
 	margin-right: 0 !important;
 	font-weight: 500 !important;
 	padding:0px !important;
+}
+
+.qa-quicklinks {
+	margin-bottom: 10px;
+}
+.qa-quicklinks:visited {
+	color: #FFFFFF;
 }

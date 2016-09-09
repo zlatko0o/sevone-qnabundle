@@ -310,8 +310,21 @@ class qa_html_theme extends qa_html_theme_base
 
 		$html = "<div class='qa-widget-side'><h2 class='sideBarH2'>Quick links</h2> ";
 
-		$html .= "<a href='{$container->get('router')->generate('dcr_q2a_ask_question')}'>Ask a question</a><br>";
-		$html .= "<a href='{$container->get('router')->generate('dcr_q2a_favorites')}'>Favorites</a>";
+		$html .= "<a class=\"btn btn-info qa-quicklinks col-md-12\" href=\"" . $container->get('router')->generate('dcr_q2a', array('path' => 'forums/')) . "\" role=\"button\">";
+		$html .= "<i class=\"fa fa-angle-double-right\" aria-hidden=\"true\"></i> Recent questions";
+		$html .= "</a>";
+
+		$html .= "<a class=\"btn btn-success qa-quicklinks col-md-12\" href=\"{$container->get('router')->generate('dcr_q2a_ask_question')}\" role=\"button\">";
+		$html .= "<i class=\"fa fa-question-circle\" aria-hidden=\"true\"></i> Ask a question";
+		$html .= "</a>";
+
+		$html .= "<a class=\"btn btn-warning qa-quicklinks col-md-12\" href=\"{$container->get('router')->generate('dcr_q2a_favorites')}\" role=\"button\">";
+		$html .= "<i class=\"fa fa-star\" aria-hidden=\"true\"></i> Favorites";
+		$html .= "</a>";
+
+		$html .= "<a class=\"btn btn-info qa-quicklinks col-md-12\" href=\"" . $container->get('router')->generate('dcr_q2a', array('path' => 'forums/questions/')) . "\" role=\"button\">";
+		$html .= "<i class=\"fa fa-check\" aria-hidden=\"true\"></i> All questions";
+		$html .= "</a>";
 
 		$html .= "</div>";
 
