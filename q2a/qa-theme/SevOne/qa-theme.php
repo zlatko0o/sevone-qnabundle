@@ -308,7 +308,7 @@ class qa_html_theme extends qa_html_theme_base
 		 */
 		$container = $self->getContainer();
 
-		$html = "<div class='qa-widget-side'><h2 class='sideBarH2'>Quick links</h2> ";
+		$html = "<div class='qa-widget-side'> ";
 
 		$html .= "<a class=\"btn btn-info qa-quicklinks col-md-12\" href=\"" . $container->get('router')->generate('dcr_q2a', array('path' => 'forums/')) . "\" role=\"button\">";
 		$html .= "<i class=\"fa fa-angle-double-right\" aria-hidden=\"true\"></i> Recent questions";
